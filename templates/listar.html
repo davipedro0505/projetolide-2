@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Inscritos</title>
+</head>
+<body>
+    <h1>Todos os inscritos do Projeto LIDE</h1>
+    <ul>
+        {% for i in inscritos %}
+            <li>{{ i.primeiro_nome}} - {{ iultimo_nome}} {{ i.email}} - {{ i.cidade}}/{{ i.estado}}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
