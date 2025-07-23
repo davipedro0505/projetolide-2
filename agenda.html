@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -164,15 +165,59 @@
     </header>
     <main>
         <section class="agenda-hero">
-            <h1>Agenda do Clube de Leitura</h1>
+            <h1>Reserve seu Dia de Leitura</h1>
             <p>
-                Organize e acompanhe os próximos encontros, atividades e leituras do seu clube. Mantenha todos informados e participe ativamente!
+                Escolha uma data para dedicar à leitura e compartilhe com o clube! Programe seu momento especial e incentive outros membros a participarem.
             </p>
         </section>
         <section class="agenda-section">
-            <h2>Próximos Encontros</h2>
-            
-            
+            <h2>Agende seu Dia de Leitura</h2>
+            <form class="inventarioForm" id="reservarForm">
+            <input type="text" name="nome" placeholder="Seu nome" required>
+            <input type="date" name="data" required>
+            <input type="time" name="hora" required>
+            <input type="text" name="livro" placeholder="Livro que pretende ler" required>
+            <button type="submit">Reservar</button>
+            </form>
+            <div id="reservas-lista" style="margin-top:20px;">
+    
+            </div>
+        </section>
+        <script>
+            // Função para carregar reservas do localStorage
+            function carregarReservas() {
+            const lista = document.getElementById('reservas-lista');
+            lista.innerHTML = '';
+            const reservas = JSON.parse(localStorage.getItem('reservasLide') || '[]');
+            reservas.forEach(r => {
+                const reserva = document.createElement('div');
+                reserva.style.marginBottom = '12px';
+                reserva.innerHTML = `<strong>${r.nome}</strong> reservou <em>${r.livro}</em> para leitura em <strong>${r.data}</strong> às <strong>${r.hora}</strong>.`;
+                lista.appendChild(reserva);
+            });
+            }
+
+            // Evento de envio do formulário
+            document.getElementById('reservarForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const novaReserva = {
+                nome: form.nome.value,
+                data: form.data.value,
+                hora: form.hora.value,
+                livro: form.livro.value
+            };
+            const reservas = JSON.parse(localStorage.getItem('reservasLide') || '[]');
+            reservas.push(novaReserva);
+            localStorage.setItem('reservasLide', JSON.stringify(reservas));
+            carregarReservas();
+            form.reset();
+            });
+
+            // Carrega reservas ao abrir a página
+            carregarReservas();
+        </script>
+    </div>
         </section>
     </main>
    <footer class="footer">
@@ -181,7 +226,6 @@
       <img src="imagens/logo.svg" alt="Logo LIDE" class="footer-logo">
       <p>Projeto LIDE — Livro, Diálogo e Educação</p>
     </div>
-
     <div class="footer-contact">
       <h4>Contato</h4>
       <p>Email: <a href="mailto:contato@lide.com">projetolide@contato.com</a></p>
