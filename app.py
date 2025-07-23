@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-# from email.mime.application import MIMEApplication  # pra quando for usar o PDF
+
 
 app = Flask(__name__)
 from flask_sqlalchemy import SQLAlchemy 
